@@ -1,4 +1,4 @@
-### Hi there 👋
+### Language breakdown of my repositories
 
 ![Language Breakdown](https://raw.githubusercontent.com/nint8835/nint8835/master/languages.svg)
 
