@@ -53,7 +53,9 @@ for language, colour in language_colours.items():
 
 language_counts = {
     key: language_counts[key]
-    for key in sorted(language_counts, key=lambda k: language_counts[k], reverse=True)[:10]
+    for key in sorted(language_counts, key=lambda k: language_counts[k], reverse=True)[
+        :10
+    ]
 }
 print(language_counts, language_colours)
 
