@@ -18,7 +18,7 @@ jobs:
       - name: Render chart
         run: python chart.py
         env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_PAT: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
       - name: Commit changes
         run: |
           git config --local user.email "riley@rileyflynn.me"
