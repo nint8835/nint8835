@@ -13,7 +13,7 @@ resp = requests.post(
     json={
         "query": """
             {
-                viewer {
+                user(login: "nint8835") {
                     repositories(first: 100, ownerAffiliations: [OWNER], isFork: false) {
                         nodes {
                             name
