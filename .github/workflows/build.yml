@@ -1,0 +1,25 @@
+on:
+  schedule:
+    - "40 7 * * *"
+
+jobs:
+  build:
+    name: Render chart
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      with:
+        python-version: 3.8
+    - name: Install requirements
+      run: |
+        python -m pip install -r requirements.txt
+    - name: Render chart
+      run: python chart.py
+      env:
+        GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    - name: Commit changes
+      run: |
+        git add languages.svg
+        git commit -m "Update languages breakdown" || echo "No changes to commit"
+        git push origin master || echo "No changes to commit"
