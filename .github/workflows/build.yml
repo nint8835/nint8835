@@ -18,7 +18,7 @@ jobs:
       - name: Render chart
         run: python chart.py
         env:
-          GITHUB_PAT: ${{ secrets.GITHUB_PERSONAL_ACCESS_TOKEN }}
+          GITHUB_PAT: ${{ secrets.PAT_GITHUB }} # GitHub refuses to let me add a secret called GITHUB_PAT or GITHUB_PERSONAL_ACCESS_TOKEN, so I'm reversing the name
       - name: Commit changes
         run: |
           git config --local user.email "riley@rileyflynn.me"
