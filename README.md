@@ -1,6 +1,8 @@
 ### Language breakdown of my repositories
 
-![Language Breakdown](https://raw.githubusercontent.com/nint8835/nint8835/master/languages.svg)
+Each pie slice represents the number of bytes of each language I have on GitHub in self-owned, non-forked repositories.
+
+![Chart of number of bytes of each language I have on GitHub in self-owned, non-forked repositories](https://raw.githubusercontent.com/nint8835/nint8835/master/languages.svg)
 
 <!--
 **nint8835/nint8835** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
