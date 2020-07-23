@@ -8,6 +8,11 @@ from pygal.style import Style
 
 load_dotenv()
 
+# Colours to be used for languages lacking their own colour.
+# Selected from https://github.com/ozh/github-colors from the languages that were
+# deemed unlikely to ever appear in this graph.
+FILLER_COLOURS = ["#E8274B", "#64C800", "#9DC3FF", "#a957b0", "#cd6400"]
+
 resp = requests.post(
     "https://api.github.com/graphql",
     json={
@@ -35,7 +40,7 @@ resp = requests.post(
     headers={"Authorization": f"Bearer {os.environ['GITHUB_PAT']}"},
 )
 language_counts: Dict[str, int] = {}
-language_colours: Dict[str, str] = {}
+language_colours: Dict[str, str] = {"Other": FILLER_COLOURS.pop()}
 
 for repository in resp.json()["data"]["viewer"]["repositories"]["nodes"]:
     for language in repository["languages"]["edges"]:
@@ -49,21 +54,23 @@ for repository in resp.json()["data"]["viewer"]["repositories"]["nodes"]:
 
 for language, colour in language_colours.items():
     if colour is None:
-        language_colours[language] = "#ababab"
+        language_colours[language] = FILLER_COLOURS.pop()
 
-language_counts = {
+sorted_languages = sorted(language_counts, key=lambda k: language_counts[k], reverse=True)
+
+top_language_counts = {
     key: language_counts[key]
-    for key in sorted(language_counts, key=lambda k: language_counts[k], reverse=True)[
-        :10
+    for key in sorted_languages[
+        :9
     ]
 }
-print(language_counts, language_colours)
+top_language_counts["Other"] = sum(language_counts[key] for key in sorted_languages[9:])
 
-style = Style(colors=list(language_colours[lang] for lang in language_counts))
+style = Style(colors=list(language_colours[lang] for lang in top_language_counts))
 
 chart = pygal.Pie(style=style)
 
-for language, byte_count in language_counts.items():
+for language, byte_count in top_language_counts.items():
     chart.add(language, byte_count)
 
 chart.render_to_file("languages.svg")
