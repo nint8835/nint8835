@@ -61,10 +61,10 @@ sorted_languages = sorted(language_counts, key=lambda k: language_counts[k], rev
 top_language_counts = {
     key: language_counts[key]
     for key in sorted_languages[
-        :9
+        :10
     ]
 }
-top_language_counts["Other"] = sum(language_counts[key] for key in sorted_languages[9:])
+top_language_counts["Other"] = sum(language_counts[key] for key in sorted_languages[10:])
 
 style = Style(colors=list(language_colours[lang] for lang in top_language_counts))
 
