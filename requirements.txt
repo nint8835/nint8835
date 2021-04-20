@@ -14,7 +14,7 @@ mypy==0.782
 mypy-extensions==0.4.3
 nox==2020.5.24
 pathspec==0.8.0
-py==1.9.0
+py==1.10.0
 pygal==2.4.0
 python-dotenv==0.14.0
 regex==2020.6.8
