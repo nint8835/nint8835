@@ -19,7 +19,7 @@ resp = requests.post(
         "query": """
             {
                 viewer {
-                    repositories(first: 100, ownerAffiliations: [OWNER], isFork: false) {
+                    repositories(first: 100, ownerAffiliations: [OWNER], isFork: false, orderBy: {field: UPDATED_AT, direction: DESC}) {
                         nodes {
                             name
                             languages(first: 20) {
@@ -28,6 +28,13 @@ resp = requests.post(
                                     node {
                                         name
                                         color
+                                    }
+                                }
+                            }
+                            repositoryTopics(first: 10) {
+                                nodes {
+                                    topic {
+                                        name
                                     }
                                 }
                             }
@@ -43,6 +50,8 @@ language_counts: Dict[str, int] = {}
 language_colours: Dict[str, str] = {"Other": FILLER_COLOURS.pop()}
 
 for repository in resp.json()["data"]["viewer"]["repositories"]["nodes"]:
+    if any(topic["name"] == "language-stats-ignored" for topic in repository["repositoryTopics"]["nodes"]):
+        continue
     for language in repository["languages"]["edges"]:
         lang_name = language["node"]["name"]
         language_counts[lang_name] = (
