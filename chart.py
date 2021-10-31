@@ -50,7 +50,7 @@ language_counts: Dict[str, int] = {}
 language_colours: Dict[str, str] = {"Other": FILLER_COLOURS.pop()}
 
 for repository in resp.json()["data"]["viewer"]["repositories"]["nodes"]:
-    if any(topic["name"] == "language-stats-ignored" for topic in repository["repositoryTopics"]["nodes"]):
+    if any(topic["topic"]["name"] == "language-stats-ignored" for topic in repository["repositoryTopics"]["nodes"]):
         continue
     for language in repository["languages"]["edges"]:
         lang_name = language["node"]["name"]
