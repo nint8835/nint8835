@@ -19,7 +19,12 @@ resp = requests.post(
         "query": """
             {
                 viewer {
-                    repositories(first: 100, ownerAffiliations: [OWNER], privacy: PUBLIC, isFork: false, orderBy: {field: UPDATED_AT, direction: DESC}) {
+                    repositories(
+                    first: 100
+                    ownerAffiliations: [OWNER]
+                    isFork: false
+                    orderBy: {field: UPDATED_AT, direction: DESC}
+                    ) {
                         nodes {
                             name
                             languages(first: 20) {
