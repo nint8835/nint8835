@@ -107,6 +107,7 @@ top_language_counts["Other"] = sum(
 style = Style(colors=list(language_colours[lang] for lang in top_language_counts))
 
 chart = pygal.Pie(style=style)
+chart.uuid = "4845283b-3763-48f2-a4a5-440176c46fed"
 
 for language, byte_count in top_language_counts.items():
     chart.add(language, byte_count)
