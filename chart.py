@@ -20,6 +20,7 @@ query ($first: Int, $after: String) {
       first: $first
       after: $after
       ownerAffiliations: [OWNER]
+      isArchived: false
       isFork: false
       orderBy: {field: UPDATED_AT, direction: DESC}
     ) {
