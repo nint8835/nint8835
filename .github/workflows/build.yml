@@ -7,6 +7,8 @@ jobs:
   build:
     name: Render chart
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.11
@@ -21,9 +23,8 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PAT_GITHUB }} # GitHub refuses to let me add a secret called GITHUB_PAT or GITHUB_PERSONAL_ACCESS_TOKEN, so I'm reversing the name
       - name: Commit changes
-        run: |
-          git config --local user.email "actions@rileyflynn.me"
-          git config --local user.name "GitHub Action"
-          git add languages.svg
-          git commit -m "Update languages breakdown" || echo "No changes to commit"
-          git push origin master || echo "No changes to commit"
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🤖 Update chart"
+          commit_author: "Chartbot <chartbot@bootleg.technology>"
+          commit_user_email: "chartbot@bootleg.technology"
