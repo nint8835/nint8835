@@ -52,9 +52,15 @@ pyflakes==3.1.0
     # via flake8
 pygal==3.0.0
     # via -r requirements.in
+python-dateutil==2.8.2
+    # via time-machine
 python-dotenv==1.0.0
     # via -r requirements.in
 requests==2.31.0
+    # via -r requirements.in
+six==1.16.0
+    # via python-dateutil
+time-machine==2.13.0
     # via -r requirements.in
 types-requests==2.31.0.8
     # via -r requirements.in

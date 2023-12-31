@@ -6,4 +6,5 @@ nox==2023.4.22
 pygal==3.0.0
 python-dotenv==1.0.0
 requests==2.31.0
+time-machine==2.13.0
 types-requests==2.31.0.8
