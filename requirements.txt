@@ -6,7 +6,7 @@
 #
 argcomplete==3.1.2
     # via nox
-black==23.9.1
+black==24.3.0
     # via -r requirements.in
 certifi==2023.7.22
     # via requests
