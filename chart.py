@@ -11,6 +11,8 @@ from zoneinfo import ZoneInfo
 
 load_dotenv()
 
+MAX_LANGUAGES = 10
+
 # Colours to be used for languages lacking their own colour.
 # Selected from https://github.com/ozh/github-colors from the languages that were
 # deemed unlikely to ever appear in this graph.
@@ -78,7 +80,7 @@ def fetch_repos() -> Iterator[Dict[str, Any]]:
 
 
 language_counts: Dict[str, int] = {}
-language_colours: Dict[str, str] = {"Other": FILLER_COLOURS.pop()}
+language_colours: Dict[str, str | None] = {"Other": FILLER_COLOURS.pop()}
 
 for repository in fetch_repos():
     if any(
@@ -103,9 +105,11 @@ sorted_languages = sorted(
     language_counts, key=lambda k: language_counts[k], reverse=True
 )
 
-top_language_counts = {key: language_counts[key] for key in sorted_languages[:10]}
+top_language_counts = {
+    key: language_counts[key] for key in sorted_languages[:MAX_LANGUAGES]
+}
 top_language_counts["Other"] = sum(
-    language_counts[key] for key in sorted_languages[10:]
+    language_counts[key] for key in sorted_languages[MAX_LANGUAGES:]
 )
 
 style = Style(colors=list(language_colours[lang] for lang in top_language_counts))
