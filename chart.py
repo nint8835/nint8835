@@ -1,13 +1,13 @@
 import datetime
 import os
 from typing import Any, Dict, Iterator
-from zoneinfo import ZoneInfo
 
 import pygal
 import requests
 import time_machine
 from dotenv import load_dotenv
 from pygal.style import Style
+from zoneinfo import ZoneInfo
 
 load_dotenv()
 
