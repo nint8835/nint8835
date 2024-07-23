@@ -1,5 +1,6 @@
 import datetime
 import os
+import sqlite3
 from typing import Any, Dict, Iterator
 
 import pygal
@@ -79,6 +80,22 @@ def fetch_repos() -> Iterator[Dict[str, Any]]:
         yield from repositories_resp["nodes"]
 
 
+con = sqlite3.connect(
+    ":memory:" if not os.environ.get("DUMP_LANGUAGE_STATS") else "languages.db"
+)
+cur = con.cursor()
+
+cur.execute("DROP TABLE IF EXISTS languages")
+cur.execute(
+    """
+    CREATE TABLE languages (
+        repository TEXT,
+        language TEXT,
+        bytes INTEGER
+    )
+    """
+)
+
 language_counts: Dict[str, int] = {}
 language_colours: Dict[str, str | None] = {"Other": FILLER_COLOURS.pop()}
 
@@ -96,6 +113,13 @@ for repository in fetch_repos():
 
         if lang_name not in language_colours:
             language_colours[lang_name] = language["node"]["color"]
+
+        cur.execute(
+            "INSERT INTO languages VALUES (?, ?, ?)",
+            (repository["name"], lang_name, language["size"]),
+        )
+
+con.commit()
 
 for language, colour in language_colours.items():
     if colour is None:
