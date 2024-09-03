@@ -1,0 +1,15 @@
+[project]
+name = "github-profile"
+version = "0.1.0"
+description = "Script to automatically generate a chart for my GitHub profile readme"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pygal>=3.0.5",
+    "python-dotenv>=1.0.1",
+    "requests>=2.32.3",
+    "time-machine>=2.15.0",
+]
+
+[tool.uv]
+dev-dependencies = ["ruff>=0.6.3"]
