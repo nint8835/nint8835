@@ -28,6 +28,7 @@ query ($first: Int, $after: String) {
       ownerAffiliations: [OWNER]
       isArchived: false
       isFork: false
+      visibility: PUBLIC
       orderBy: {field: UPDATED_AT, direction: DESC}
     ) {
       pageInfo {
