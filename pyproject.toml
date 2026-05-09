@@ -7,7 +7,7 @@ requires-python = ">=3.12"
 dependencies = [
     "pygal>=3.0.5",
     "python-dotenv>=1.0.1",
-    "requests>=2.32.3",
+    "requests>=2.33.0",
     "time-machine>=2.15.0",
 ]
 
