@@ -10,14 +10,13 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Set up Python 3.12
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: 3.12
       - name: Set up uv
-        # Install latest uv version using the installer
-        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+        uses: astral-sh/setup-uv@08807647e7069bb48b6ef5acd8ec9567f424441b # v8.1.0
       - name: Install requirements
         run: |
           uv sync --all-extras
@@ -26,7 +25,7 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.PAT_GITHUB }} # GitHub refuses to let me add a secret called GITHUB_PAT or GITHUB_PERSONAL_ACCESS_TOKEN, so I'm reversing the name
       - name: Commit changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@04702edda442b2e678b25b537cec683a1493fcb9 # v7.1.0
         with:
           commit_message: "🤖 Update chart"
           commit_author: "Chartbot <chartbot@bootleg.technology>"
