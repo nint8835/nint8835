@@ -5,10 +5,10 @@ description = "Script to automatically generate a chart for my GitHub profile re
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "pygal>=3.0.5",
-    "python-dotenv>=1.0.1",
-    "requests>=2.32.3",
-    "time-machine>=2.15.0",
+    "pygal>=3.1.0",
+    "python-dotenv>=1.2.2",
+    "requests>=2.33.1",
+    "time-machine>=3.2.0",
 ]
 
 [tool.uv]
