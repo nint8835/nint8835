@@ -1,14 +1,15 @@
 import datetime
 import os
 import sqlite3
-from typing import Any, Dict, Iterator
+from collections.abc import Iterator
+from typing import Any
+from zoneinfo import ZoneInfo
 
 import pygal
 import requests
 import time_machine
 from dotenv import load_dotenv
 from pygal.style import Style
-from zoneinfo import ZoneInfo
 
 load_dotenv()
 
@@ -60,7 +61,7 @@ query ($first: Int, $after: String) {
 """
 
 
-def fetch_repos() -> Iterator[Dict[str, Any]]:
+def fetch_repos() -> Iterator[dict[str, Any]]:
     variables = {"first": 100}
     has_next_page = True
 
@@ -97,8 +98,8 @@ cur.execute(
     """
 )
 
-language_counts: Dict[str, int] = {}
-language_colours: Dict[str, str | None] = {"Other": FILLER_COLOURS.pop()}
+language_counts: dict[str, int] = {}
+language_colours: dict[str, str | None] = {"Other": FILLER_COLOURS.pop()}
 
 for repository in fetch_repos():
     if any(
@@ -137,7 +138,7 @@ top_language_counts["Other"] = sum(
     language_counts[key] for key in sorted_languages[MAX_LANGUAGES:]
 )
 
-style = Style(colors=list(language_colours[lang] for lang in top_language_counts))
+style = Style(colors=[language_colours[lang] for lang in top_language_counts])
 
 chart = pygal.Pie(style=style)
 # Chart uses a random UUID. Override the random ID with a fixed one to prevent there

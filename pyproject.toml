@@ -11,5 +11,5 @@ dependencies = [
     "time-machine>=3.2.0",
 ]
 
-[tool.uv]
-dev-dependencies = ["ruff>=0.6.3"]
+[dependency-groups]
+dev = ["ruff==0.16.0"]
